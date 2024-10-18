@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des étudiants</h1>
+    <ul>
+        {% for etudiant in etudiants %}
+            <li>
+                {{ etudiant.prenom }} {{ etudiant.nom }} - {{ etudiant.email }}
+                <a href="{{ path('etudiant_edit', {'id': etudiant.id}) }}">Modifier</a>
+                <form method="post" action="{{ path('etudiant_delete', {'id': etudiant.id}) }}" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ etudiant.id) }}">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('new_etudiant') }}">Ajouter un nouvel étudiant</a>
+{% endblock %}
