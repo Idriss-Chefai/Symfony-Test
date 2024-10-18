@@ -55,7 +55,7 @@ class EtudiantController extends AbstractController
         ]);
     }
 
-    #[Route("/etudiant/{id}/delete", name:"etudiant_delete", methods:"POST")]
+    #[Route("/etudiant/{id}/delete", name:"delete_etudiant", methods:"POST")]
     public function delete(Request $request, Etudiant $etudiant, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete'.$etudiant->getId(), $request->request->get('_token'))) {
@@ -63,7 +63,7 @@ class EtudiantController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('etudiant_list');
+        return $this->redirectToRoute('list_etudiant');
     }
 
 }
